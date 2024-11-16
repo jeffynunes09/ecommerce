@@ -34,6 +34,7 @@ export const theme = {
   text: {
     title: '2rem',
     subtitle: '1.5rem',
+    variable1:"3.5rem",
     description: '0.8rem',
   },
   size: {

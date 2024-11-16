@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 
 export const NavbarStyle = styled.div`
+z-index:111;
   margin:0;
   padding:0;    
   width: ${({ theme }) => theme.size.nav.width};
@@ -12,6 +13,9 @@ export const NavbarStyle = styled.div`
   flex-direction:column;
   align-items:center;
   justify-content:center;
+  -webkit-box-shadow: 0px 13px 7px -4px rgba(0,0,0,0.5);
+-moz-box-shadow: 0px 13px 7px -4px rgba(0,0,0,0.5);
+box-shadow: 0px 13px 7px -4px rgba(0,0,0,0.5);
 `;
 
 export const ContainerNavMenu = styled.div`
@@ -52,7 +56,7 @@ justify-content:center;
 
 export const Title = styled.h1`
 
-  font-weight:500;
+  font-weight:600;
   font-size:38px;
 
 
@@ -78,18 +82,23 @@ export const SearchBar = styled.input`
 
 width:609px;
 height:48px;
+margin-right:10px;
 border-radius:50px;
-border:1px solid ${({theme})=> theme.colors.terciary};
+border:none;
 color: ${({theme})=> theme.colors.terciary};
-font-size: ${({theme})=> theme.text.subtitle}
+background-color:${({theme})=> theme.colors.secondary};
+font-size: ${({theme})=> theme.text.subtitle};
 
 
 
-`
+`;
 export const ContainerSearchBar = styled.div`
-
+margin-left:20px;
+width:650px;
+height:48px;
 display:flex;
 align-items:center;
 justify-content:center;
-
+font-size: ${({theme})=> theme.text.title};
+gap:10px;
 `
