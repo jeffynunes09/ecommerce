@@ -5,7 +5,9 @@ import { FaRegCircleUser } from "react-icons/fa6";
 function Navbar() {
   return (
     <>
-    <NavSection/>
+    <NavSection>
+   
+    </NavSection>
     <NavbarStyle>
       <ContainerNavMenu>
         <Logo>

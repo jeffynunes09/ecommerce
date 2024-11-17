@@ -34,10 +34,12 @@ justify-content:center;
 export const NavSection = styled.div`
 
  background-color:${({theme})=> theme.colors.primary};
+ height:30px;
  width:${({theme}) => theme.size.navSection};
  
 
 `;
+
 
 
 export const Logo = styled.div`

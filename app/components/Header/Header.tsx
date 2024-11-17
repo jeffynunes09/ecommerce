@@ -1,11 +1,5 @@
 import React from 'react'
 import { ButtonHeader, ContainerButtonHeader, ContainerDescriptionHeader, ContainerHeader, ContainerInfoHeader, ContainerMarcas, ContainerTitle, DescriptionHeader, HeaderStyle, Info, InfoHeader, TitleHeader, TitleInfo } from './Header.style'
-import Image from 'next/image'
-import Ck from  "../../../public/assets/ck.jpeg"
-import Versaci from  "../../../public/assets/versaci.jpeg"
-import Gucci from  "../../../public/assets/gucci.jpeg"
-import Zara from  "../../../public/assets/zara.jpeg"
-import Prada from  "../../../public/assets/prada.jpeg"
 
 function Header() {
   return (

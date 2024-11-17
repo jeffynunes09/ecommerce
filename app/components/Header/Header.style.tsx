@@ -17,6 +17,29 @@ export const HeaderStyle =  styled.div`
 
 `;
 
+export const ContainerStars = styled.div`
+
+font-size :${({theme}) => theme.text.variable1};
+
+`
+export const ContainerStar1 = styled.div`
+
+position:absolute;
+left:1100px;
+top:250px;
+font-size :${({theme}) => theme.text.variable2};
+
+`
+export const ContainerStar2 = styled.div`
+
+
+position:absolute;
+left:900px;
+top:550px;
+font-size :${({theme}) => theme.text.variable1};
+
+`
+
 export const ContainerHeader = styled.div`
 
  width:596px;
@@ -143,6 +166,7 @@ color: rgba(0, 0, 0, 0.6);
 `;
 
 
+
 export const ContainerMarcas = styled.div`
 
 width:100%;
@@ -157,4 +181,3 @@ gap:80px;
 
 
 `
-

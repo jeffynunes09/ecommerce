@@ -2,6 +2,7 @@
 
 import Header from "./components/Header/Header";
 import Navbar from "./components/nav/Navbar";
+import Arraivals from "./components/Products/Arraivals";
 
 
 
@@ -10,6 +11,7 @@ export default function Home() {
     <>
    <Navbar/> 
    <Header/> 
+   <Arraivals/>
     </>
   );
 }
