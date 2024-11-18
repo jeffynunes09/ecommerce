@@ -26,6 +26,9 @@ export const theme = {
     primary: '#000000',
     secondary: '#F2F0F1',
     teriary: '#F0F0F0',
+    cards:"#9A9A9A",
+    stars: "gold",
+    gray:"#ccc"
   },
   fonts: {
     primary: 'Integral CF',

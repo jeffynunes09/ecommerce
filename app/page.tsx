@@ -3,6 +3,7 @@
 import Header from "./components/Header/Header";
 import Navbar from "./components/nav/Navbar";
 import Arraivals from "./components/Products/Arraivals";
+import Clothes from "./components/StylesClothes/Clothes";
 
 
 
@@ -12,6 +13,7 @@ export default function Home() {
    <Navbar/> 
    <Header/> 
    <Arraivals/>
+   <Clothes/>
     </>
   );
 }

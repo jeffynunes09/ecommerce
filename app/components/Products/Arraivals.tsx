@@ -23,6 +23,24 @@ function Arraivals() {
         </ButtonView>
       </ContainerButtonView>
     </ProductsSection>
+    <ProductsSection>
+      <ContainerTitleArraivals>
+        <TitleArraivals>
+        TOP SELLING
+        </TitleArraivals>
+      </ContainerTitleArraivals>
+      <ContainerCardArraivals>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+      </ContainerCardArraivals>
+      <ContainerButtonView>
+        <ButtonView>
+             View All
+        </ButtonView>
+      </ContainerButtonView>
+    </ProductsSection>
     </>
   )
 }
