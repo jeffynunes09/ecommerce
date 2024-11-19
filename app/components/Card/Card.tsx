@@ -11,11 +11,11 @@ const StarContainer = styled.div`
   margin-top: 10px;
 `;
 
-const Star = styled.svg<{ isActive: boolean }>`
+const Star = styled.svg<{ $isActive: boolean }>`
   width: 24px;
   height: 24px;
   cursor: pointer;
-  fill: ${({ isActive, theme }) => (isActive ? theme.colors.stars : theme.colors.gray)};
+  fill: ${({ $isActive, theme }) => ($isActive ? theme.colors.stars : theme.colors.gray)};
 `;
 
 function Card() {
@@ -31,12 +31,12 @@ function Card() {
         <Image src={camisa1} width={300} height={220} alt='' />
       </ImgCard>
       <TitleCard>T-SHIRT WITH TAPE DETAILS</TitleCard>
-     
+
       <StarContainer>
         {[...Array(5)].map((_, index) => (
           <Star
             key={index}
-            isActive={index < rating}
+            $isActive={index < rating} // Usando a prop $isActive
             onClick={() => handleStarClick(index)}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -45,7 +45,7 @@ function Card() {
           </Star>
         ))}
       </StarContainer>
-         <PriceCard>$120</PriceCard>
+      <PriceCard>$120</PriceCard>
     </ContainerCard>
   );
 }
