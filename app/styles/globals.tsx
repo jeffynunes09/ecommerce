@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -22,45 +22,45 @@ export const GlobalStyle = createGlobalStyle`
 
 export const theme = {
   colors: {
-    background: '#FFFFFF',
-    primary: '#000000',
-    secondary: '#F2F0F1',
-    teriary: '#F0F0F0',
-    cards:"#9A9A9A",
+    background: "#FFFFFF",
+    primary: "#000000",
+    secondary: "#F2F0F1",
+    teriary: "#F0F0F0",
+    cards: "#9A9A9A",
     stars: "gold",
-    gray:"#ccc"
+    gray: "#ccc",
   },
   fonts: {
-    primary: 'Integral CF',
-    secondary: 'Satoshi',
+    primary: "Integral CF",
+    secondary: "Satoshi",
   },
   text: {
-    title: '2rem',
-    subtitle: '1.5rem',
-    variable1:"3.5rem",
-    variable2:"5.5rem",
-    description: '0.8rem',
+    title: "2rem",
+    subtitle: "1.5rem",
+    variable1: "3.5rem",
+    variable2: "5.5rem",
+    description: "0.8rem",
   },
   size: {
     nav: {
-      width: '100%',
-      height: '100px',
+      width: "100%",
+      height: "100px",
     },
-    navSection:{
-       width: '100%',
-      height: '38px'
+    navSection: {
+      width: "100%",
+      height: "38px",
     },
     button: {
-      width: '210px',
-      height: '52px',
+      width: "210px",
+      height: "52px",
     },
     card: {
-      width: '296px',
-      height: '298px',
+      width: "296px",
+      height: "298px",
     },
     section: {
-      width: '1239px',
-      height: '886px',
+      width: "1239px",
+      height: "886px",
     },
   },
 };
