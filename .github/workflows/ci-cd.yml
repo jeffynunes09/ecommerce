@@ -53,7 +53,7 @@ jobs:
       - name: Build Docker image for Next.js
         run: |
          
-          docker build --pull --rm -f "./Dockerfile" -t ecommerce:latest .
+          docker build --pull --rm -f "./Dockerfile" -t ecommerce
           
       # Login no DockerHub
       - name: Docker login
@@ -65,5 +65,5 @@ jobs:
       # Push da imagem Docker para o DockerHub
       - name: Push Docker image to DockerHub
         run: |
-          docker tag ecommerce ${{ secrets.DOCKER_USERNAME }}/ecommerce:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/ecommerce:latest
+          docker tag ecommerce ${{ secrets.DOCKER_USERNAME }}/ecommerce
+          docker push ${{ secrets.DOCKER_USERNAME }}/ecommerce
