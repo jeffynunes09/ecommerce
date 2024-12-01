@@ -65,5 +65,4 @@ jobs:
       # Passo 4: Tag e Push da imagem Docker para o DockerHub
       - name: Tag and Push Docker image to DockerHub
         run: |
-          docker tag ecommerce:latest ${{ secrets.DOCKER_USERNAME }}/ecommerce:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/ecommerce:latest
