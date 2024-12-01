@@ -48,17 +48,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Passo 1: Listar arquivos após o checkout
-      - name: List files to debug
-        run: |
-          ls -la
-
-      # Passo 2: Verificar estrutura de diretórios para garantir que a pasta ecommerce está lá
-      - name: Check for ecommerce directory
-        run: |
-          echo "Current directory: $(pwd)"
-          ls -la ecommerce
-          
+      
       # Passo 3: Construir a imagem Docker
       - name: Build Docker image for Next.js
         run: |
