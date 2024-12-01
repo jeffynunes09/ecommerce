@@ -58,7 +58,7 @@ jobs:
         run: |
           # Verificando se o diretório ecommerce está presente
           ls -la ./ecommerce
-          docker build -t my-frontend ./ecommerce
+          docker build -t my-frontend ./ecommerce/Dockerfile
 
       # Login no DockerHub (caso precise)
       - name: Docker login
