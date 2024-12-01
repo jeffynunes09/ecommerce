@@ -52,9 +52,7 @@ jobs:
       # Passo 3: Construir a imagem Docker
       - name: Build Docker image for Next.js
         run: |
-          echo "Current directory: $(pwd)"
-          # Verificando se o diretório ecommerce está presente
-          ls -la ecommerce
+         
           docker build --pull --rm -f "./Dockerfile" -t ecommerce:latest .
           
       # Login no DockerHub
