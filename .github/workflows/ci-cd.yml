@@ -43,10 +43,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Construir a imagem Docker para o Next.js
+     
       - name: Build Docker image for Next.js
         run: |
-          docker build -t my-frontend ./nextjs
+          docker build -t my-frontend ./ecommerce
 
       # Login no DockerHub (caso precise)
       - name: Docker login
