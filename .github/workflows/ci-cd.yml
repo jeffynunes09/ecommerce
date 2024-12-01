@@ -53,7 +53,7 @@ jobs:
       - name: Build Docker image for Next.js
         run: |
          
-          docker build --pull --rm -f "./Dockerfile" -t ecommerce
+          docker build --pull --rm -f "./Dockerfile" -t ecommerce:latest .
           
       # Login no DockerHub
       - name: Docker login
