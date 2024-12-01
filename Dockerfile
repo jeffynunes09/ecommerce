@@ -1,22 +1,32 @@
+# Usando imagem oficial do Node.js
+FROM node:22 AS build
 
-
-# Escolher uma imagem base do Node.js
-FROM node:18
-
-# Definir o diretório de trabalho dentro do contêiner
+# Diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copiar o package.json e o package-lock.json para o contêiner
-COPY ./nextjs/package*.json ./
+# Copiar os arquivos de configuração (package.json e package-lock.json) da pasta ecommerce
+COPY package*.json ./  
 
-# Instalar as dependências
+# Instalar dependências
 RUN npm install
 
-# Copiar o restante do código-fonte
-COPY ./app/ ./
+COPY ./app/ ./ 
+# Construção da aplicação Next.js
+RUN npm run build
 
-# Expor a porta na qual o Next.js vai rodar
+# Stage de produção (imagem final)
+FROM node:22 AS production
+
+# Definir o diretório de trabalho para a produção
+WORKDIR /app
+
+# Copiar os arquivos da etapa de build
+COPY --from=build /app /app
+
+# Expor a porta do frontend
 EXPOSE 3000
 
-# Rodar o aplicativo Next.js
-CMD ["npm", "run", "dev"]
+# Rodar a aplicação
+CMD ["npm", "run", "start"]
+
+
