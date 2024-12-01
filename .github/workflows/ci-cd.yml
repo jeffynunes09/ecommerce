@@ -62,8 +62,11 @@ jobs:
             username: ${{ secrets.DOCKER_USERNAME }}
             password:  ${{ secrets.DOCKER_PASSWORD }}
        
-      # Push da imagem Docker para o DockerHub
-      - name: Push Docker image to DockerHub
+      # Passo 4: Tag e Push da imagem Docker para o DockerHub
+      - name: Tag and Push Docker image to DockerHub
         run: |
-          docker tag ecommerce ${{ secrets.DOCKER_USERNAME }}/ecommerce
-          docker push ${{ secrets.DOCKER_USERNAME }}/ecommerce
+          # Tag da imagem
+          docker tag ecommerce:latest ${{ secrets.DOCKER_USERNAME }}/ecommerce:latest
+          
+          # Push da imagem para o DockerHub
+          docker push ${{ secrets.DOCKER_USERNAME }}/ecommerce:latest
