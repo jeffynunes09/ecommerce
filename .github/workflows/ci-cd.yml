@@ -41,7 +41,7 @@ jobs:
     steps:
       # Checkout do código
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Passo 1: Verificar a estrutura de diretórios após o checkout
       - name: List files to debug
