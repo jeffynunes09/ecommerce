@@ -3,7 +3,6 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
       - master
       - develop
       - 'feature/*'
@@ -15,64 +14,59 @@ on:
       - develop
 
 jobs:
-  # Job para construir a imagem Docker
   build:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    # Configuração do Node.js (caso você tenha dependências Node.js no seu app)
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22'
+      # Listar todos os arquivos para verificar a estrutura do repositório
+      - name: List all files in the repo
+        run: |
+          ls -la
 
-    # Instalar dependências e rodar testes
-    - name: Install dependencies and test
-      run: |
-        npm install
-        npm run test
+      # Configuração do Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
 
-  # Job para criar a imagem Docker e enviar para Docker Hub
+      # Instalar dependências e rodar testes
+      - name: Install dependencies and test
+        run: |
+          npm install
+          npm run test
+
   dockerize-frontend:
     runs-on: ubuntu-latest
     needs: build
-
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # Checkout do código novamente
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    # Verificar a estrutura do repositório para depuração
-    - name: List files to debug
-      run: |
-        ls -la
+      # Passo 1: Listar arquivos após o checkout
+      - name: List files to debug
+        run: |
+          ls -la
 
-    # Construir a imagem Docker
-    - name: Build Docker image for Next.js
-      run: |
-        docker build -t my-frontend ./ecommerce
+      # Passo 2: Construir a imagem Docker
+      - name: Build Docker image for Next.js
+        run: |
+          # Verificando se o diretório ecommerce está presente
+          ls -la ./ecommerce
+          docker build -t my-frontend ./ecommerce
 
-    # Login no DockerHub
-    - name: Docker login
-      run: |
-        echo ${{ secrets.DOCKER_USERNAME }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      # Login no DockerHub (caso precise)
+      - name: Docker login
+        run: |
+          echo ${{ secrets.DOCKER_USERNAME }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
-    # Push da imagem Docker para o DockerHub
-    - name: Push Docker image to DockerHub
-      run: |
-        docker tag my-frontend ${{ secrets.DOCKER_USERNAME }}/my-frontend:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/my-frontend:latest
-
-  # Job para o deploy no Render
-  deploy:
-    runs-on: ubuntu-latest
-    needs: dockerize-frontend
-
-    steps:
-    - name: Deploy to Render
-      uses: render-examples/github-action@v1
-      with:
-        serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-        apiKey: ${{ secrets.RENDER_API_KEY }}
+      # Push da imagem Docker
+      - name: Push Docker image to DockerHub
+        run: |
+          docker tag my-frontend ${{ secrets.DOCKER_USERNAME }}/my-frontend:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-frontend:latest
