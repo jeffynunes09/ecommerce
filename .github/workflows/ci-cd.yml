@@ -18,7 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Checkout do código
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -44,7 +43,6 @@ jobs:
     needs: build
     
     steps:
-      # Checkout do código novamente
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -53,12 +51,18 @@ jobs:
         run: |
           ls -la
 
-      # Passo 2: Construir a imagem Docker
+      # Passo 2: Verificar estrutura de diretórios para garantir que a pasta ecommerce está lá
+      - name: Check for ecommerce directory
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la ecommerce
+          
+      # Passo 3: Construir a imagem Docker
       - name: Build Docker image for Next.js
         run: |
           # Verificando se o diretório ecommerce está presente
-          ls -la ./ecommerce
-          docker build --pull --rm -f "Dockerfile" -t ecommerce:latest 
+          ls -la ecommerce
+          docker build --pull --rm -f "./Dockerfile" -t ecommerce:latest .
 
       # Login no DockerHub (caso precise)
       - name: Docker login
@@ -68,5 +72,5 @@ jobs:
       # Push da imagem Docker
       - name: Push Docker image to DockerHub
         run: |
-          docker tag my-frontend ${{ secrets.DOCKER_USERNAME }}/my-frontend:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-frontend:latest
+          docker tag ecommerce ${{ secrets.DOCKER_USERNAME }}/ecommerce:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/ecommerce:latest
