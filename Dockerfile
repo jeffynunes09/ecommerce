@@ -10,8 +10,8 @@ COPY package*.json ./
 # Instalar dependências
 RUN npm install
 
-# Copiar o código da aplicação do diretório src para o container
-COPY app/src/ ./ 
+# Copiar o código da aplicação do diretório app/src para o container
+COPY ./app/src/ ./ 
 
 # Construção da aplicação Next.js
 RUN npm run build
