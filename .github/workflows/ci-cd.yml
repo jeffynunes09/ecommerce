@@ -46,7 +46,7 @@ jobs:
     steps:
       # Checkout do código novamente
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Passo 1: Listar arquivos após o checkout
       - name: List files to debug
