@@ -3,6 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
+      - main
       - master
       - develop
       - 'feature/*'
@@ -14,54 +15,79 @@ on:
       - develop
 
 jobs:
+  # Job para construir a imagem Docker
   build:
     runs-on: ubuntu-latest
     
     steps:
-      # Checkout do código
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      # Configuração do Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '22'
+    # Configuração do Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '22'
 
-      # Instalar dependências e rodar testes
-      - name: Install dependencies and test
-        run: |
-          npm install
-          npm run test
+    # Instalar dependências e rodar testes
+    - name: Install dependencies and test
+      run: |
+        npm install
+        npm run test
 
+  # Job para criar a imagem Docker e enviar para Docker Hub
   dockerize-frontend:
     runs-on: ubuntu-latest
     needs: build
-    
+
     steps:
-      # Checkout do código
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      # Passo 1: Verificar a estrutura de diretórios após o checkout
-      - name: List files to debug
-        run: |
-          ls -la
+    # Configurar Docker Buildx
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-      # Passo 2: Construir a imagem Docker
-      - name: Build Docker image for Next.js
-        run: |
-          # Verificar o diretório ecommerce
-          ls -la ./ecommerce
-          docker build -t my-frontend ./ecommerce
+    # Login no Docker Hub
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Login no DockerHub (caso precise)
-      - name: Docker login
-        run: |
-          echo ${{ secrets.DOCKER_USERNAME }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+    # Construir e enviar a imagem Docker
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./ecommerce
+        push: true
+        tags: nunesjefferson425
 
-      # Push da imagem Docker
-      - name: Push Docker image to DockerHub
-        run: |
-          docker tag my-frontend ${{ secrets.DOCKER_USERNAME }}/my-frontend:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-frontend:latest
+  # Job para o deploy na Vercel
+  deploy:
+    runs-on: ubuntu-latest
+    needs: dockerize-frontend
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '22'
+
+    - name: Install dependencies
+      run: |
+        npm install
+
+    - name: Deploy to Vercel
+      uses: vercel-action/vercel-action@v20
+      with:
+        vercel_token: ${{ secrets.VERCEL_TOKEN }}
+        vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
