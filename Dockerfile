@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar dependências
-RUN npm install --legacy-peer-deps
+RUN npm install react@18 react-dom@18
 
 RUN npm install
 
